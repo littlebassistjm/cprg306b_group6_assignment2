@@ -32,12 +32,12 @@ const StudentCard = ({ student, onRemove }: StudentCardProps) => {
       </div>
 
       {showDetails && (
-        <div className="flex flex-wrap items-center gap-2 rounded-md bg-gray-50 p-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-md bg-gray-200 p-3">
           <p className="text-sm text-gray-800">
-            Average: <span className="font-semibold">{student.average}</span>
+            Average: <span className="font-bold">{student.average}</span>
           </p>
           {isHonourRoll && (
-            <span className="rounded-full bg-yellow-200 px-2 py-0.5 text-xs font-medium text-yellow-800">
+            <span className="rounded-full bg-yellow-500 px-2 py-1 text-xs font-medium text-yellow-100">
               Honour roll
             </span>
           )}
@@ -48,14 +48,14 @@ const StudentCard = ({ student, onRemove }: StudentCardProps) => {
         <button
           type="button"
           onClick={handleToggleDetails}
-          className="rounded-md bg-blue-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-800"
+          className="rounded-md border bg-blue-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-white hover:border-blue-900 hover:text-blue-900"
         >
           {showDetails ? "Hide details" : "Show details"}
         </button>
         <button
           type="button"
           onClick={handleRemove}
-          className="rounded-md border border-red-300 px-3 py-1.5 text-sm font-medium text-red-700 hover:bg-red-50"
+          className="rounded-md border bg-red-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-white hover:text-red-700 hover:border-red-700"
         >
           Remove
         </button>
