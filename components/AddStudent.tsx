@@ -1,4 +1,13 @@
 "use client";
+/*
+File Name: AddStudent.tsx
+Author: Hajira Farooq
+Date: October 30, 2026
+Description: 4 inputs for first name, last name, grade, and average. 
+The callback that receives the new students details is the prop onAdd. 
+If either first or last name isn't filled in, pressing Add Student will do nothing.
+When new student is added, the input names are reset and empty. The grade resets to 9 and the average goes to 70.
+*/
 
 import { useState } from "react";
 import { Student } from "@/data/students";
