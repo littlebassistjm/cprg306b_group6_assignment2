@@ -1,5 +1,16 @@
 "use client";
 
+/*
+File Name: StudentPortal.tsx
+Authors: Jose Mari Christian Hilario, Hajira Farooq
+Date: October 30, 2026
+Description: Stores a list of students and the search text using state.
+Adding, removing, searching, and clearing students is all handled by this component.
+Passes data & functions to other components when needed to.
+Displays Overview, Students, and Add a Student sections.
+*/
+
+
 import { useState } from "react";
 import StatsPanel from "@/components/StatsPanel";
 import StudentList from "@/components/StudentList";
