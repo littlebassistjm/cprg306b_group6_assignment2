@@ -3,35 +3,61 @@
 import { useState } from "react";
 import StatsPanel from "@/components/StatsPanel";
 import StudentList from "@/components/StudentList";
+import SearchBox from "@/components/SearchBox";
+import AddStudent from "@/components/AddStudent";
 import { students, Student } from "@/data/students";
 
 const StudentPortal = () => {
-    const [studentList, setStudentList] = useState<Student[]>(students);
-    const [searchText, setSearchText] = useState("");
+  const [studentList, setStudentList] = useState<Student[]>(students);
+  const [searchText, setSearchText] = useState("");
 
-    const filteredStudents = studentList.filter((student) =>
-        `${student.firstName} ${student.lastName}`
-            .toLowerCase()
-            .includes(searchText.toLowerCase())
-    );
+  const filteredStudents = studentList.filter((student) =>
+    `${student.firstName} ${student.lastName}`
+      .toLowerCase()
+      .includes(searchText.trim().toLowerCase())
+  );
 
-    const handleRemove = (id: number) => {
-        setStudentList(studentList.filter((student) => student.id !== id));
-    };
+  const handleRemove = (id: number) => {
+    setStudentList(studentList.filter((student) => student.id !== id));
+  };
 
-    return (
-        <div className="flex flex-col gap-10">
-            <section id="overview" className="scroll-mt-20">
-                <h2 className="mb-4 text-2xl font-semibold text-blue-900">Overview</h2>
-                <StatsPanel students={studentList} />
-            </section>
+  const handleAddStudent = (newStudent: Omit<Student, "id">) => {
+    const nextId =
+      studentList.reduce((max, student) => Math.max(max, student.id), 0) + 1;
+    setStudentList([...studentList, { id: nextId, ...newStudent }]);
+  };
 
-            <section id="students" className="scroll-mt-20">
-                <h2 className="mb-4 text-2xl font-semibold text-blue-900">Students</h2>
-                <StudentList students={filteredStudents} onRemove={handleRemove} />
-            </section>
+  const handleClearAll = () => {
+    setStudentList([]);
+  };
+
+  return (
+    <div className="mx-auto max-w-6xl space-y-10 px-4 py-8">
+      <section id="overview" className="scroll-mt-20">
+        <h2 className="mb-4 text-2xl font-bold text-blue-900">Overview</h2>
+        <StatsPanel students={studentList}/>
+      </section>
+
+      <section id="students" className="scroll-mt-20">
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-2xl font-bold text-blue-900">Students</h2>
+          <button
+            type="button"
+            onClick={handleClearAll}
+            className="rounded-md border bg-gray-700 px-3 py-1.5 text-sm font-medium text-white hover:border-red-700 hover:bg-white hover:text-red-700">Clear all</button>
         </div>
-    );
+        <div className="mb-4">
+          <SearchBox searchText={searchText} onSearchChange={setSearchText} />
+        </div>
+        <StudentList students={filteredStudents} onRemove={handleRemove} />
+      </section>
+
+      <section id="add-student" className="scroll-mt-20">
+        <h2 className="mb-4 text-2xl font-bold text-blue-900">Add a student</h2>
+        <AddStudent onAdd={handleAddStudent} />
+      </section>
+    </div>
+  );
 };
 
 export default StudentPortal;
