@@ -1,5 +1,16 @@
 "use client";
 
+/*
+File Name: SearchBox.tsx
+Author: Hajira Farooq
+Date: October 30, 2026
+Description: Allows users to filter students by name. 
+Receives current search text and a function from the parent component.
+When typing in the box, the search text is updated through that function.
+Parent component uses the text to filter the student list.
+*/
+
+
 interface SearchBoxProps {
   searchText: string;
   onSearchChange: (text: string) => void;
